@@ -1,0 +1,16 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}" />
+
+<div class="form-container">
+    <h2>{% if editar %}Editar{% else %} Novo{% endif %} Evento</h2> 
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.as_p }} 
+        
+        <button type="submit">{% if editar %}Alterar{% else %} Salvar{% endif %} Evento</button>
+    </form>
+</div>
+{% endblock %}

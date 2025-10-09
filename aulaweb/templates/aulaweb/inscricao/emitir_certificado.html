@@ -1,0 +1,22 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}" />
+
+<div class="form-container">
+    <h2>Confirmação de Emissão de Certificado</h2>
+    
+    <p>Você está prestes a EMITIR o certificado de participação para:</p>
+    
+    <h3>{{ inscricao.usuario.nome }}</h3>
+    <p>No evento: <strong>{{ inscricao.evento.nome }}</strong></p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <p>Esta ação irá marcar o certificado como DISPONÍVEL.</p>
+        <button type="submit" style="background-color: #38a169;">Confirmar Emissão</button>
+        
+        <a href="{% url 'detalhar_evento' inscricao.evento.pk %}">Cancelar e Voltar</a>
+    </form>
+</div>
+{% endblock %}

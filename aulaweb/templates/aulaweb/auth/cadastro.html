@@ -1,0 +1,19 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}" />
+
+<div class="form-container">
+    <h2>Cadastro de Novo Usuário</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.as_p }} 
+        
+        <button type="submit">Cadastrar</button>
+        <div style="margin-top: 15px;">
+            Já tem conta? <a href="{% url 'login_usuario' %}">Fazer Login</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

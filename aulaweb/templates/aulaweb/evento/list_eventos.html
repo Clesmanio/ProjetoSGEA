@@ -1,0 +1,28 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+    
+{% if request.session.usuario_perfil == 'ORGANIZADOR' %}
+    <a href="{% url 'create_evento' %}" class="btn-add">+ Novo Evento</a> 
+{% endif %}
+
+<div class="eventos-container">
+    {% for evento in lista_eventos %}
+    <div class="evento-card">
+        
+        <div class="evento-titulo"><a href="{% url 'detalhar_evento' evento.pk %}">{{ evento.nome }}</a></div>
+        
+        <div class="evento-info">Tipo: {{ evento.get_tipo_evento_display }}</div>
+        <div class="evento-info">Data: {{ evento.data_inicial|date:"d/m/Y H:i" }}</div>
+        
+        {% if request.session.usuario_perfil == 'ORGANIZADOR' %}
+            <div style="margin-top:10px;">
+                <a href="{% url 'update_evento' evento.pk %}">Editar</a> |
+                <a href="{% url 'delete_evento' evento.pk %}">Remover</a>
+            </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    <div class="sem-eventos">Nenhum evento encontrado</div>
+    {% endfor %}
+</div>
+{% endblock %}

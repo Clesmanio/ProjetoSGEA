@@ -1,0 +1,42 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+<div class="container my-5" style="max-width: 800px; margin: 30px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    
+    <h1>Sobre o Sistema de Gestão de Eventos Acadêmicos (SGEA)</h1>
+    
+    <p>
+        Este projeto é um exemplo desenvolvido para fins didáticos na
+        disciplina de Programação Web do CEUB.
+        O objetivo é demonstrar conceitos básicos de desenvolvimento web
+        utilizando o framework Django, focando em boas práticas de backend e segurança.
+    </p>
+
+    <h2>Funcionalidades Chave</h2>
+    <ul>
+        <li>Estrutura de projeto Django (MVC)</li>
+        <li>Restrição de acesso por Perfil (Organizador, Aluno, Professor)</li>
+        <li>Sistema de Inscrição e Controle de Vagas</li>
+        <li>Gerenciamento de Propriedade do Evento (apenas o criador edita/deleta)</li>
+        <li>Simulação de Emissão e Controle de Certificados</li>
+    </ul>
+
+    <hr style="margin-top: 20px;">
+
+    <h2>Equipe de Desenvolvimento</h2>
+    <p>
+        O projeto SGEA foi desenvolvido pelos seguintes integrantes:
+    </p>
+    
+    <ul style="list-style-type: disc; margin-left: 20px;">
+        <li>Clesmanio Filho</li>
+        <li>Eduardo Martins</li>
+        <li>João Vitor Passos</li>
+        </ul>
+
+    <hr style="margin-top: 20px;">
+
+    <h2>Docência</h2>
+    <p>Professor responsável: <b>{{ professor }}</b></p>
+    <p>Para dúvidas ou sugestões sobre o desenvolvimento, entre em contato.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+<a href="{% url 'list_eventos' %}" class="btn-add">Inscrever-se em Eventos</a>
+
+<div class="eventos-container">
+    {% for inscricao in inscricoes %}
+    <div class="evento-card">
+        
+        <div class="evento-titulo">Evento: {{ inscricao.evento.nome }}</div>
+        
+        <div class="evento-info">Inscrito em: {{ inscricao.data_inscricao|date:"d/m/Y H:i" }}</div>
+        
+        <p>
+            Certificado: 
+            {% if inscricao.certificado_emitido %}
+                <span style="color: green; font-weight: bold;">Disponível</span>
+            {% else %}
+                <span style="color: orange;">Pendente</span>
+            {% endif %}
+        </p>
+
+        <div style="margin-top: 10px;">
+            <a href="{% url 'detalhar_evento' inscricao.evento.pk %}">Ver Detalhes</a>
+            
+            | <a href="{% url 'cancelar_inscricao' inscricao.pk %}" style="color: red;">Cancelar Inscrição</a>
+            
+            {% if inscricao.certificado_emitido %}
+                | <a href="{% url 'emitir_certificado' inscricao.pk %}">Baixar Certificado</a> 
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <div class="sem-eventos">Você não está inscrito em nenhum evento.</div>
+    {% endfor %}
+</div>
+{% endblock %}

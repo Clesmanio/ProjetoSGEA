@@ -1,0 +1,16 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}" />
+
+<div class="form-container">
+    <h2>Cancelar Inscrição</h2>
+    <p>Tem certeza que deseja cancelar sua inscrição no evento <strong>{{ inscricao.evento.nome }}</strong>?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #dc3545;">Sim, Cancelar Inscrição</button>
+        <a href="{% url 'list_inscricoes' %}">Voltar</a>
+    </form>
+</div>
+{% endblock %}

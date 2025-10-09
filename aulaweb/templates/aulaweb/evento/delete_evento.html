@@ -1,0 +1,14 @@
+{% extends "aulaweb/base.html" %}
+{% block conteudo %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}" />
+<div class="form-container">
+    <h2>Remover Evento</h2>
+    <p>Tem certeza que deseja remover o evento <strong>{{ evento.nome }}</strong>? Todas as inscrições serão perdidas!</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, remover evento</button>
+        <a href="{% url 'list_eventos' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
