@@ -8,7 +8,8 @@ PERFIS_USUARIO = (
 )
 
 class Usuario(models.Model):
-    nome = models.CharField(max_length=150, db_column='nome')
+    nome = models.CharField(max_length=150, db_column='nome') 
+    email = models.CharField(max_length=255, unique=True, null=False, blank=False, default='email@teste.com') 
     telefone = models.CharField(max_length=15, blank=True, null=True)
     instituicao_ensino = models.CharField(
         max_length=100,
@@ -18,7 +19,7 @@ class Usuario(models.Model):
     )
 
     perfil = models.CharField(max_length=15, choices=PERFIS_USUARIO)
-    
+    senha_hash = models.CharField(max_length=128, default='!')
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_atualizacao = models.DateTimeField(auto_now=True)
 
