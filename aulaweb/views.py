@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Count
 from .models import Evento, Usuario, Inscricao
 from .forms import EventoForm, UsuarioForm, LoginForm, InscricaoForm
+from django.contrib.auth.hashers import make_password, check_password
 
 def index(request):
     if 'usuario_id' not in request.session:
@@ -26,7 +27,11 @@ def cadastro_usuario(request):
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():
-            form.save() 
+            
+            novo_usuario = form.save(commit=False)
+            senha_texto = form.cleaned_data['senha']
+            novo_usuario.senha_hash = make_password(senha_texto) 
+            novo_usuario.save()     
             messages.success(request, "Cadastro realizado com sucesso! Faça login.")
             return redirect('login_usuario')
         else:
@@ -40,18 +45,23 @@ def login_usuario(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
+            login_email = form.cleaned_data['email'] 
+            password = form.cleaned_data['password']
+            
             try:
-                usuario = Usuario.objects.get(nome=form.cleaned_data['username']) 
-                
-                messages.success(request, f"Bem-vindo(a), {usuario.nome}!")
-                
-                request.session['usuario_id'] = usuario.id
-                request.session['usuario_nome'] = usuario.nome
-                request.session['usuario_perfil'] = usuario.perfil
-                
-                return redirect('index') 
+                usuario = Usuario.objects.get(email=login_email) 
+                if check_password(password, usuario.senha_hash):
+                    messages.success(request, f"Bem-vindo(a), {usuario.nome}!")
+                    request.session['usuario_id'] = usuario.id
+                    request.session['usuario_nome'] = usuario.nome
+                    request.session['usuario_perfil'] = usuario.perfil
+                    
+                    return redirect('index') 
+                else:
+                    messages.error(request, "E-mail ou senha inválidos.")
+
             except Usuario.DoesNotExist:
-                messages.error(request, "Usuário ou senha inválidos.")
+                messages.error(request, "E-mail ou senha inválidos.")
     else:
         form = LoginForm()
     
