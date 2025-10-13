@@ -45,7 +45,7 @@ def populate_database_secure():
             for nome, email, telefone, instituicao, perfil in usuarios_chave:
                 Usuario.objects.create(
                     nome=nome,
-                    email=email, # NOVO CAMPO
+                    email=email, 
                     telefone=telefone,
                     instituicao_ensino=instituicao,
                     perfil=perfil,
@@ -54,10 +54,10 @@ def populate_database_secure():
             print(f"8 Usuários Chave inseridos. Senha: {SENHA_PADRAO}")
 
             # 3. Usuários de Teste (50 Alunos Adicionais)
-            for i in range(9, 59): # IDs 9 a 58
+            for i in range(9, 59):
                 Usuario.objects.create(
                     nome=f'Aluno Teste {i:02d}',
-                    email=f'aluno{i:02d}@teste.com', # NOVO CAMPO: Email único
+                    email=f'aluno{i:02d}@teste.com',
                     telefone=f'619100000{i:02d}',
                     instituicao_ensino='Universidade Teste',
                     perfil='ALUNO',
