@@ -168,7 +168,6 @@ def delete_evento(request, id):
     return render(request, 'aulaweb/evento/delete_evento.html', {'evento': evento})
 
 def list_inscricoes(request):
-    # VERIFICA LOGIN
     usuario_id = request.session.get('usuario_id')
     if not usuario_id:
         messages.warning(request, "Faça login para ver suas inscrições.")
