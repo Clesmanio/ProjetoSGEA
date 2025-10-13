@@ -12,7 +12,7 @@
             "program": "${workspaceFolder}\\manage.py",
             "console": "integratedTerminal",
             "django": true,
-            "args": ["runserver",]
+            "args": ["runserver", "0.0.0.0:8000"]
         }
     ]
 }
