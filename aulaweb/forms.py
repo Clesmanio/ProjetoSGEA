@@ -42,10 +42,11 @@ class UsuarioForm(forms.ModelForm):
     
     class Meta:
         model = Usuario
-        fields = ['nome', 'telefone', 'instituicao_ensino', 'perfil']
+        fields = ['nome', 'email', 'telefone', 'instituicao_ensino', 'perfil']
         
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'seu.email@dominio.com'}),
             'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '(XX) XXXXX-XXXX'}),
             'instituicao_ensino': forms.TextInput(attrs={'class': 'form-control'}),
             'perfil': forms.Select(attrs={'class': 'form-control'}),
@@ -53,6 +54,7 @@ class UsuarioForm(forms.ModelForm):
         
         labels = {
             'nome': 'Nome Completo',
+            'email': 'E-mail de Login', 
             'telefone': 'Telefone',
             'instituicao_ensino': 'Instituição de Ensino',
             'perfil': 'Perfil de Usuário',
@@ -69,9 +71,9 @@ class InscricaoForm(forms.ModelForm):
         }
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
-        label='Usuário de Login',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+    email = forms.CharField(
+        label='E-mail de Login',
+        widget=forms.EmailInput(attrs={'class': 'form-control'}) # Use EmailInput
     )
     password = forms.CharField(
         label='Senha',
