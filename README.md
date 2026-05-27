@@ -36,7 +36,7 @@ O projeto cumpre todos os requisitos acadêmicos, destacando:
     ```
 6.  Inicie o servidor: `python manage.py runserver`.
 
-### 🔑 Credenciais de Teste
+###  Credenciais de Teste
 
 O login é feito usando o **E-mail** e a senha padrão **`123456`**.
 
